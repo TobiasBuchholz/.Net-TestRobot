@@ -38,7 +38,7 @@
     <Copyright>Copyright 2021</Copyright>
 
     <!--Version of C# to use -->
-    <LangVersion>default</LangVersion>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
 
   <!-- Define what happens on build and release -->
