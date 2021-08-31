@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using PCLMock;
-using Plugin.TestRobot;
+using TestRobot;
 
 namespace Playground.UnitTests
 {

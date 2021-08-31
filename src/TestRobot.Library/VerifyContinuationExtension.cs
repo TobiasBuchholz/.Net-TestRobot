@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using PCLMock;
 
-namespace Plugin.TestRobot
+namespace TestRobot
 {
 	public static class VerifyContinuationExtension
 	{

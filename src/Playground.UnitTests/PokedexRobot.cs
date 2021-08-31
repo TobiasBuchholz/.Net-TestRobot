@@ -1,5 +1,5 @@
 using System;
-using Plugin.TestRobot;
+using TestRobot;
 using Xunit;
 
 namespace Playground.UnitTests

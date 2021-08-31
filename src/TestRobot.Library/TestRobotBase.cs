@@ -2,7 +2,7 @@ using System;
 using System.Reactive.Concurrency;
 using Microsoft.Reactive.Testing;
 
-namespace Plugin.TestRobot
+namespace TestRobot
 {
     public abstract class TestRobotBase<TRobot, TRobotResult> : Genesis.TestUtil.IBuilder
         where TRobot : TestRobotBase<TRobot, TRobotResult>

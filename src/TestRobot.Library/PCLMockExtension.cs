@@ -4,7 +4,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using PCLMock;
 
-namespace Plugin.TestRobot
+namespace TestRobot
 {
 	public static class PCLMockExtension
 	{

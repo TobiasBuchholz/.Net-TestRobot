@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TestRobot.Library\TestRobot.Library.csproj" />
+    <ProjectReference Include="..\TestRobot.CodeGenerator\TestRobot.CodeGenerator.csproj" OutputItemType="Analyzer" />
   </ItemGroup>
 
 </Project>
