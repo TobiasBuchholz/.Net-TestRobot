@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>9</LangVersion>
+    <Configurations>Debug;Release;DebugGenerator</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGenerator|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;DEBUGGENERATOR</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

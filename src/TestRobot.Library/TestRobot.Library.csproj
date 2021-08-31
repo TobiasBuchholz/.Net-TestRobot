@@ -39,10 +39,17 @@
 
     <!--Version of C# to use -->
     <LangVersion>9</LangVersion>
+    <Configurations>Debug;Release;DebugGenerator</Configurations>
   </PropertyGroup>
 
   <!-- Define what happens on build and release -->
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='DebugGenerator'">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
