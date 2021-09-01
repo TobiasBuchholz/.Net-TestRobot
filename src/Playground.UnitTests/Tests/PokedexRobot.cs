@@ -1,8 +1,9 @@
 using System;
+using Playground.Features;
 using TestRobot;
 using Xunit;
 
-namespace Playground.UnitTests
+namespace Playground.UnitTests.Tests
 {
     public sealed class PokedexRobot : TestRobotGenerated<PokedexRobot, PokedexRobotResult>
     {

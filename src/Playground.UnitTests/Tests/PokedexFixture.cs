@@ -1,4 +1,5 @@
 ﻿using System;
+using Playground.UnitTests.Tests;
 using Xunit;
 
 namespace Playground.UnitTests

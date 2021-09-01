@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
 using PCLMock;
+using Playground.Features;
 
-namespace Playground.UnitTests
+namespace Playground.UnitTests.Tests
 {
     public sealed class PokedexMock : MockBase<IPokedex>, IPokedex
     {

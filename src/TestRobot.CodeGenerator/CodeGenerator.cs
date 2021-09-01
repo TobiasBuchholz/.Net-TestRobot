@@ -23,7 +23,8 @@ namespace TestRobot.CodeGenerator
 using System;
 using System.Linq.Expressions;
 using PCLMock;
-using Playground.UnitTests;
+using Playground.Features;
+using Playground.UnitTests.Tests;
 
 namespace TestRobot
 {

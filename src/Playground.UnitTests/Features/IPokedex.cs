@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Playground.UnitTests
+namespace Playground.Features
 {
     public interface IPokedex
     {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using PCLMock;
+using Playground.Features;
+using Playground.UnitTests.Tests;
 using TestRobot;
 
 namespace Playground.UnitTests
@@ -11,11 +13,6 @@ namespace Playground.UnitTests
     {
         internal IPokedex _pokedex;
 
-        protected Exception _exceptionToThrow;
-
-        public TRobot WithThrowsException(Exception exception) =>
-            With(ref _exceptionToThrow, exception);
-        
 		public override TRobot Build()
 		{
             _pokedex ??= CreatePokedexMock();
