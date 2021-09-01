@@ -37,7 +37,7 @@ namespace TestRobot.CodeGenerator
             codeWriter.AppendLine();
             codeWriter.AppendLine("namespace TestRobot");
             codeWriter.AppendLine("{");
-            codeWriter.AppendLineWithIndent(1, "public abstract class TestRobotGenerated<TRobot, TRobotResult> : TestRobotBase<TRobot, TRobotResult>");
+            codeWriter.AppendLineWithIndent(1, "public abstract class AutoTestRobot<TRobot, TRobotResult> : TestRobotBase<TRobot, TRobotResult>");
             codeWriter.AppendLineWithIndent(2, "where TRobot : TestRobotBase<TRobot, TRobotResult>");
             codeWriter.AppendLineWithIndent(2, "where TRobotResult : TestRobotResultBase<TRobot, TRobotResult>");
             codeWriter.AppendLineWithIndent(1, "{");
@@ -52,26 +52,26 @@ namespace TestRobot.CodeGenerator
             codeWriter.AppendLinesWithIndent(2, mockedClassInfos.Select(x => $"protected virtual {x.MockName} Create{x.MockName}() => new {x.MockName}(MockBehavior.Loose);"));
             codeWriter.AppendLineWithIndent(1, "}");
             codeWriter.AppendLine();
-            codeWriter.AppendLineWithIndent(1, "public abstract class TestRobotResultGenerated<TRobot, TRobotResult> : TestRobotResultBase<TRobot, TRobotResult>");
+            codeWriter.AppendLineWithIndent(1, "public abstract class AutoTestRobotResult<TRobot, TRobotResult> : TestRobotResultBase<TRobot, TRobotResult>");
             codeWriter.AppendLineWithIndent(2, "where TRobot : TestRobotBase<TRobot, TRobotResult>");
             codeWriter.AppendLineWithIndent(2, "where TRobotResult : TestRobotResultBase<TRobot, TRobotResult>");
             codeWriter.AppendLineWithIndent(1, "{");
-            codeWriter.AppendLineWithIndent(2, "private readonly TestRobotGenerated<TRobot, TRobotResult> _autoRobot;");
+            codeWriter.AppendLineWithIndent(2, "private readonly AutoTestRobot<TRobot, TRobotResult> _autoRobot;");
             codeWriter.AppendLine();
-            codeWriter.AppendLineWithIndent(2, "protected TestRobotResultGenerated(TRobot robot)");
+            codeWriter.AppendLineWithIndent(2, "protected AutoTestRobotResult(TRobot robot)");
             codeWriter.AppendLineWithIndent(3, ": base(robot)");
             codeWriter.AppendLineWithIndent(2, "{");
-            codeWriter.AppendLineWithIndent(3, "_autoRobot = robot as TestRobotGenerated<TRobot, TRobotResult>;");
+            codeWriter.AppendLineWithIndent(3, "_autoRobot = robot as AutoTestRobot<TRobot, TRobotResult>;");
             codeWriter.AppendLineWithIndent(2, "}");
             codeWriter.AppendLine();
-            codeWriter.AppendLines(mockedClassInfos.Select(x => CreateVerifyMockMethod(x)));
+            codeWriter.AppendLines(mockedClassInfos.Select(CreateVerifyMockMethod));
             codeWriter.AppendLineWithIndent(1, "}");
             codeWriter.AppendLine("}");
 
-            context.AddSource("TestRobotGenerated.cs", SourceText.From(codeWriter.ToString(), Encoding.UTF8));
+            context.AddSource("AutoTestRobot.cs", SourceText.From(codeWriter.ToString(), Encoding.UTF8));
         }
 
-        private string CreateVerifyMockMethod(MockedClassInfo classInfo)
+        private static string CreateVerifyMockMethod(MockedClassInfo classInfo)
         {
             var codeWriter = new CodeWriter();
             codeWriter.AppendLineWithIndent(2, $"public RobotVerifyContinuation<TRobot, TRobotResult> Verify{classInfo.MockName}(Expression<Action<{classInfo.MockedInterfaceName}>> selector)");

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Playground.UnitTests.Tests
 {
-    public sealed class PokedexRobot : TestRobotGenerated<PokedexRobot, PokedexRobotResult>
+    public sealed class PokedexRobot : AutoTestRobot<PokedexRobot, PokedexRobotResult>
     {
         private IPokedex _sut;
         private long _something;
@@ -44,7 +44,7 @@ namespace Playground.UnitTests.Tests
         }
     }
 
-    public sealed class PokedexRobotResult : TestRobotResultGenerated<PokedexRobot, PokedexRobotResult>
+    public sealed class PokedexRobotResult : AutoTestRobotResult<PokedexRobot, PokedexRobotResult>
     {
         public PokedexRobotResult(PokedexRobot robot)
             : base(robot)
