@@ -15,10 +15,23 @@ namespace TestRobot.CodeGenerator
                 Debugger.Launch();
             }
 #endif
+
+            // Register a syntax receiver that will be created for each generation pass
+            context.RegisterForSyntaxNotifications(() => new SyntaxReceiver());
         }
 
         public void Execute(GeneratorExecutionContext context)
         {
+            // retrieve the populated receiver 
+            if (!(context.SyntaxContextReceiver is SyntaxReceiver receiver))
+                return;
+
+            var mockedClassInfos = receiver.MockedClassInfos;
+            foreach(var classInfo in mockedClassInfos) {
+                Debug.WriteLine($"Write code for mocked class: {classInfo}");
+
+            }
+
             var sourceBuilder = new StringBuilder(@"
 using System;
 using System.Linq.Expressions;
