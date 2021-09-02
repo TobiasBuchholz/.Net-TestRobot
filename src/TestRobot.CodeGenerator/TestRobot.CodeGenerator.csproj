@@ -2,13 +2,74 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+
+    <!--Assembly and Namespace info -->
+    <AssemblyName>TestRobot.CodeGenerator</AssemblyName>
+    <RootNamespace>TestRobot.CodeGenerator</RootNamespace>
+    
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <AssemblyVersion>1.0.0.3</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0.3</AssemblyFileVersion>
+    <Version>1.0.0.3</Version>
+    <NeutralLanguage>en</NeutralLanguage>
+
+    <!-- Helper to add defines-->
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    
+    <!--Assembly and Namespace info -->
+    <PackageId>TestRobot.CodeGenerator</PackageId>
+    <PackageVersion>1.0.0.3</PackageVersion>
+    
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Tobias Buchholz 2021</Copyright>
+    <PackageProjectUrl>https://github.com/TobiasBuchholz/TestRobot</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TobiasBuchholz/TestRobot.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <!--    <PackageIcon>icon.png</PackageIcon>-->
+    <PackageTags>testing</PackageTags>
+
+    <Title>TestRobot</Title>
+    <Summary>Small plugin to simplify writing unit tests.</Summary>
+    <Description>This plugin helps you to abstract away ugly arranging code to write more readable unit tests.</Description>
+
+    <Owners>Tobias Buchholz</Owners>
+    <Authors>Tobias Buchholz</Authors>
+    <Copyright>Copyright 2021</Copyright>
+
+    <!--Version of C# to use -->
     <LangVersion>9</LangVersion>
     <Configurations>Debug;Release;DebugGenerator</Configurations>
+  </PropertyGroup>
+  
+  <!-- Define what happens on build and release -->
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='DebugGenerator'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <DebugType>pdbonly</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGenerator|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;DEBUGGENERATOR</DefineConstants>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <!-- This None is here so the conditionally included files show up in the Solution Explorer -->
+    <None Include="**\*.cs;**\*.xml;**\*.axml;**\*.png" Exclude="obj\**\*.*;bin\**\*.*;bin;obj" />
+    <None Remove=".vs\**" />
+    <None Remove=".idea\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0" PrivateAssets="all" />
