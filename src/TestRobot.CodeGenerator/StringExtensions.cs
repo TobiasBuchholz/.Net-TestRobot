@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TestRobot.CodeGenerator
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         public static string FirstCharToLowerCase(this string str)
         {

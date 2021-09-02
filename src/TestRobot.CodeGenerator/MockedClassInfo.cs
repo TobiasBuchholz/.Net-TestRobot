@@ -2,7 +2,7 @@
 
 namespace TestRobot.CodeGenerator
 {
-    public sealed class MockedClassInfo
+    internal sealed class MockedClassInfo
     {
         public MockedClassInfo(string mockName, string mockNamespace, string mockedInterfaceName, string mockedInterfaceNamespace)
         {

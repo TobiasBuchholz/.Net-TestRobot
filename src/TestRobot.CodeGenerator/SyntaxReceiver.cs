@@ -10,7 +10,7 @@ namespace TestRobot.CodeGenerator
 	/// <remarks>
 	/// Created on demand before each generation pass
 	/// </remarks>
-    public sealed class SyntaxReceiver : ISyntaxContextReceiver
+    internal sealed class SyntaxReceiver : ISyntaxContextReceiver
     {
         /// <summary>
 		/// Called for every syntax node in the compilation, we can inspect the nodes and save any information useful for generation

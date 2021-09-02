@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace TestRobot.CodeGenerator
 {
     [Generator]
-    public class CodeGenerator : ISourceGenerator
+    internal class CodeGenerator : ISourceGenerator
     {
         public void Initialize(GeneratorInitializationContext context)
         {

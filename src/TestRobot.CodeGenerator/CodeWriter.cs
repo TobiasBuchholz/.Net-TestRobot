@@ -4,9 +4,9 @@ using System.Text;
 
 namespace TestRobot.CodeGenerator
 {
-    public sealed class CodeWriter
+    internal sealed class CodeWriter
     {
-        private StringBuilder _stringBuilder = new();
+        private readonly StringBuilder _stringBuilder = new();
 
         public override string ToString()
         {

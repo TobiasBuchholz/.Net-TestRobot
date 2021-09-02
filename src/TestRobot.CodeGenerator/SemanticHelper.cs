@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TestRobot.CodeGenerator
 {
-    public static class SemanticHelper
+    internal static class SemanticHelper
     {
 		public static string FullNamespace(this ISymbol symbol)
 		{
