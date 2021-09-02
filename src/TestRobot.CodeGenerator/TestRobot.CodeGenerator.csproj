@@ -40,6 +40,10 @@
     <LangVersion>9</LangVersion>
     <Configurations>Debug;Release;DebugGenerator</Configurations>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
   
   <!-- Define what happens on build and release -->
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
