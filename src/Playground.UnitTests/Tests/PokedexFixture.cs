@@ -13,7 +13,11 @@ namespace Playground.UnitTests
                 .WithSomeProperty(1337)
                 .Build()
                 .AdvanceUntilEmpty()
-                .AssertSomeProperty(1337);
+                .AssertSomeProperty(1337)
+                .VerifyPokedexMock(x => x.DetectPokemonAsync())
+                .WasCalledExactlyOnce()
+                .VerifyPokeCenterMock(x => x.HealPokemon())
+                .WasCalledExactly(6);
         }
     }
 }

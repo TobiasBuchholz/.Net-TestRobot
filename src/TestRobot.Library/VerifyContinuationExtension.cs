@@ -43,53 +43,53 @@ namespace TestRobot
         where TRobotResult : TestRobotResultBase<TRobot, TRobotResult>
 	{
 		private readonly VerifyContinuation _verifyContinuation;
-		private readonly TestRobotResultBase<TRobot, TRobotResult> _robotResult;
+		private readonly TRobotResult _robotResult;
 
 		public RobotVerifyContinuation(
 			VerifyContinuation verifyContinuation,
 			TestRobotResultBase<TRobot, TRobotResult> robotResult)
 		{
 			_verifyContinuation = verifyContinuation;
-			_robotResult = robotResult;
+			_robotResult = (TRobotResult) robotResult;
 		}
 
-		public TestRobotResultBase<TRobot, TRobotResult> WasNotCalled()
+		public TRobotResult WasNotCalled()
 		{
 			_verifyContinuation.WasNotCalled();
 			return _robotResult;
 		}
 
-		public TestRobotResultBase<TRobot, TRobotResult> WasCalledAtMost(int times)
+		public TRobotResult WasCalledAtMost(int times)
 		{
 			_verifyContinuation.WasCalledAtMost(times);
 			return _robotResult;
 		}
 
-		public TestRobotResultBase<TRobot, TRobotResult> WasCalledAtLeast(int times)
+		public TRobotResult WasCalledAtLeast(int times)
 		{
 			_verifyContinuation.WasCalledAtLeast(times);
 			return _robotResult;
 		}
 
-		public TestRobotResultBase<TRobot, TRobotResult> WasCalledExactly(int times)
+		public TRobotResult WasCalledExactly(int times)
 		{
 			_verifyContinuation.WasCalledExactly(times);
 			return _robotResult;
 		}
 
-		public TestRobotResultBase<TRobot, TRobotResult> WasCalledAtMostOnce()
+		public TRobotResult WasCalledAtMostOnce()
 		{
 			_verifyContinuation.WasCalledAtMostOnce();
 			return _robotResult;
 		}
 
-		public TestRobotResultBase<TRobot, TRobotResult> WasCalledExactlyOnce()
+		public TRobotResult WasCalledExactlyOnce()
 		{
 			_verifyContinuation.WasCalledExactlyOnce();
 			return _robotResult;
 		}
 
-		public TestRobotResultBase<TRobot, TRobotResult> WasCalledAtLeastOnce()
+		public TRobotResult WasCalledAtLeastOnce()
 		{
 			_verifyContinuation.WasCalledAtLeastOnce();
 			return _robotResult;

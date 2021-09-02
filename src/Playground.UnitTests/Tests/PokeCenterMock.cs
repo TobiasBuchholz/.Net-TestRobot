@@ -16,5 +16,10 @@ namespace Playground.UnitTests.Tests
         private void ConfigureLooseBehavior()
         {
         }
+
+        public void HealPokemon()
+        {
+            Apply(x => x.HealPokemon());
+        }
     }
 }

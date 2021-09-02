@@ -6,5 +6,6 @@ namespace Playground.UnitTests.Features
 {
     public interface IPokeCenter
     {
+        void HealPokemon();
     }
 }
