@@ -23,17 +23,21 @@ namespace TestRobot.CodeGenerator
 
         public void Execute(GeneratorExecutionContext context)
         {
-            // retrieve the populated receiver 
-            if (!(context.SyntaxContextReceiver is SyntaxReceiver receiver))
+            if(context.SyntaxContextReceiver is not SyntaxReceiver receiver)
                 return;
 
-            var mockedClassInfos = receiver.MockedClassInfos;
             var codeWriter = new CodeWriter();
+            var mockedClassInfos = receiver.MockedClassInfos;
+            var usingStatements = mockedClassInfos
+                .Select(x => x.MockNamespace)
+                .Concat(mockedClassInfos.Select(x => x.MockedInterfaceNamespace))
+                .Distinct()
+                .Select(x => $"using {x};");
+            
             codeWriter.AppendLine("using System;");
             codeWriter.AppendLine("using System.Linq.Expressions;");
             codeWriter.AppendLine("using PCLMock;");
-            codeWriter.AppendLines(mockedClassInfos.Select(x => $"using {x.MockNamespace};"));
-            codeWriter.AppendLines(mockedClassInfos.Select(x => $"using {x.MockedInterfaceNamespace};"));
+            codeWriter.AppendLines(usingStatements);
             codeWriter.AppendLine();
             codeWriter.AppendLine("namespace TestRobot");
             codeWriter.AppendLine("{");
