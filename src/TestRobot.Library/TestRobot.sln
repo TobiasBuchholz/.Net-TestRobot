@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playground.UnitTests", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestRobot.CodeGenerator", "..\TestRobot.CodeGenerator\TestRobot.CodeGenerator.csproj", "{B90F970F-8861-42F4-B4B9-5719B03EB086}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "..\Playground\Playground.csproj", "{C655028A-CA98-40E7-8BAA-77F574D26B32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,12 @@ Global
 		{B90F970F-8861-42F4-B4B9-5719B03EB086}.DebugGenerator|Any CPU.Build.0 = DebugGenerator|Any CPU
 		{B90F970F-8861-42F4-B4B9-5719B03EB086}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B90F970F-8861-42F4-B4B9-5719B03EB086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C655028A-CA98-40E7-8BAA-77F574D26B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C655028A-CA98-40E7-8BAA-77F574D26B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C655028A-CA98-40E7-8BAA-77F574D26B32}.DebugGenerator|Any CPU.ActiveCfg = Debug|Any CPU
+		{C655028A-CA98-40E7-8BAA-77F574D26B32}.DebugGenerator|Any CPU.Build.0 = Debug|Any CPU
+		{C655028A-CA98-40E7-8BAA-77F574D26B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C655028A-CA98-40E7-8BAA-77F574D26B32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

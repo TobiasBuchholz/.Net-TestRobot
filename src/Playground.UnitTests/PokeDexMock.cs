@@ -2,11 +2,11 @@ using System.Threading.Tasks;
 using PCLMock;
 using Playground.Features;
 
-namespace Playground.UnitTests.Tests
+namespace Playground.UnitTests
 {
-    public sealed class PokedexMock : MockBase<IPokedex>, IPokedex
+    public sealed class PokeDexMock : MockBase<IPokeDex>, IPokeDex
     {
-        public PokedexMock(MockBehavior behavior = MockBehavior.Strict)
+        public PokeDexMock(MockBehavior behavior = MockBehavior.Strict)
             : base(behavior)
         {
             if(behavior == MockBehavior.Loose) {

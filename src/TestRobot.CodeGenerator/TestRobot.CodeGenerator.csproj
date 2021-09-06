@@ -8,9 +8,9 @@
     <RootNamespace>TestRobot.CodeGenerator</RootNamespace>
     
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
-    <AssemblyFileVersion>1.0.0.3</AssemblyFileVersion>
-    <Version>1.0.0.3</Version>
+    <AssemblyVersion>1.0.0.5</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0.5</AssemblyFileVersion>
+    <Version>1.0.0.5</Version>
     <NeutralLanguage>en</NeutralLanguage>
 
     <!-- Helper to add defines-->
@@ -18,7 +18,7 @@
     
     <!--Assembly and Namespace info -->
     <PackageId>TestRobot.CodeGenerator</PackageId>
-    <PackageVersion>1.0.0.3</PackageVersion>
+    <PackageVersion>1.0.0.5</PackageVersion>
     
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Tobias Buchholz 2021</Copyright>

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace Playground.Features
 {
-    public sealed class Pokedex : IPokedex
+    public sealed class PokeDex : IPokeDex
     {
         public Task DetectPokemonAsync()
         {

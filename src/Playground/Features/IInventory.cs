@@ -1,0 +1,11 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace Playground.Features
+{
+    public interface IInventory
+    {
+        int GetPokeBallCount();
+        Task UsePokeBallAsync();
+    }
+}
