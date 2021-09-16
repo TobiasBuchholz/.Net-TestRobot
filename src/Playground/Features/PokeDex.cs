@@ -1,12 +1,14 @@
+using System;
 using System.Threading.Tasks;
 
 namespace Playground.Features
 {
     public sealed class PokeDex : IPokeDex
     {
-        public Task DetectPokemonAsync()
+        public Task<bool> DetectPokemonAsync()
         {
-            return Task.CompletedTask;
+            Logger.Log("Wild Pokemon was detected");
+            return Task.FromResult(true);
         }
     }
 }

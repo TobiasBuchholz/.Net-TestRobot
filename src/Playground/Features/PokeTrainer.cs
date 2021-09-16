@@ -1,4 +1,7 @@
 using System;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 
 namespace Playground.Features
@@ -7,33 +10,48 @@ namespace Playground.Features
     {
         private readonly IInventory _inventory;
         private readonly IPokeDex _pokeDex;
+        private readonly IScheduler _scheduler;
 
-        public PokeTrainer(IInventory inventory, IPokeDex pokeDex)
+        public PokeTrainer(IInventory inventory, IPokeDex pokeDex, IScheduler scheduler)
         {
             _inventory = inventory;
             _pokeDex = pokeDex;
+            _scheduler = scheduler;
         }
 
-        public Task UsePokedexAsync()
+        public async Task CatchPokemonAsync()
         {
-            Console.WriteLine("A wild Pikachu was detected!");
-            return _pokeDex.DetectPokemonAsync();
+            if(await _pokeDex.DetectPokemonAsync()) {
+                await ThrowPokeBallAsync();
+            }
         }
 
-        public async Task ThrowPokeBallAsync()
+        private async Task ThrowPokeBallAsync()
         {
-            Console.WriteLine("Attempting to throw a PokeBall!");
+            Logger.Log("Attempting to throw PokeBall");
             
             if(_inventory.GetPokeBallCount() > 0) {
                 await _inventory.UsePokeBallAsync();
                 IsPokemonCaught = true;
-                Console.WriteLine("A Pokemon was caught!");
+                Logger.Log("Pokemon was caught");
             } else {
                 IsPokemonCaught = false;
-                Console.WriteLine("No Pokemon was caught!");
+                Logger.Log("No Pokemon was caught because there are no PokeBalls left");
             }
         }
         
+        public Task HealPokemonsAsync()
+        {
+            Logger.Log("Healing all Pokemons of inventory");
+            
+            return Observable
+                .Interval(TimeSpan.FromSeconds(1), _scheduler)
+                .Take(_inventory.GetPokemonCount())
+                .SelectMany(_ => _inventory.UseHealingPotionAsync().ToObservable())
+                .Do(_ => Logger.Log("Pokemon was healed"))
+                .ToTask();
+        }
+
         public bool IsPokemonCaught { get; private set; }
     }
 }

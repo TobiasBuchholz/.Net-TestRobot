@@ -4,6 +4,6 @@ namespace Playground.Features
 {
     public interface IPokeDex
     {
-        Task DetectPokemonAsync();
+        Task<bool> DetectPokemonAsync();
     }
 }

@@ -24,7 +24,12 @@ namespace TestRobot
             return (TRobot)this;
         }
 
-        public virtual TRobot Build()
+        public TRobot Build()
+        {
+            return Build(_scheduler);
+        }
+
+        protected virtual TRobot Build(IScheduler scheduler)
         {
             return (TRobot)this;
         }
@@ -49,12 +54,7 @@ namespace TestRobot
 
         public TRobotResult AdvanceTo(TimeSpan time)
         {
-            return AdvanceTo(time.Ticks);
-        }
-
-        public TRobotResult AdvanceTo(long time)
-        {
-            _scheduler.AdvanceTo(time);
+            _scheduler.AdvanceTo(time.Ticks);
             return CreateResult();
         }
     }

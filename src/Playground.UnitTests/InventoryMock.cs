@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using PCLMock;
 using Playground.Features;
+using TestRobot;
 
 namespace Playground.UnitTests
 {
@@ -16,6 +17,10 @@ namespace Playground.UnitTests
 
         private void ConfigureLooseBehavior()
         {
+            When(x => x.GetPokeBallCount()).Return(0);
+            When(x => x.GetPokemonCount()).Return(0);
+            When(x => x.UsePokeBallAsync()).ReturnsAsync();
+            When(x => x.UseHealingPotionAsync()).ReturnsAsync();
         }
 
         public int GetPokeBallCount()
@@ -23,9 +28,19 @@ namespace Playground.UnitTests
             return Apply(x => x.GetPokeBallCount());
         }
 
+        public int GetPokemonCount()
+        {
+            return Apply(x => x.GetPokemonCount());
+        }
+
         public Task UsePokeBallAsync()
         {
             return Apply(x => x.UsePokeBallAsync());
+        }
+
+        public Task UseHealingPotionAsync()
+        {
+            return Apply(x => x.UseHealingPotionAsync());
         }
     }
 }

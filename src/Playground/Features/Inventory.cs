@@ -5,20 +5,34 @@ namespace Playground.Features
 {
     public sealed class Inventory : IInventory
     {
-        private readonly int _pokeBallAmount;
+        private readonly int _pokeBallCount;
+        private readonly int _pokemonCount;
 
-        public Inventory(int pokeBallAmount)
+        public Inventory(int pokeBallCount, int pokemonCount)
         {
-            _pokeBallAmount = pokeBallAmount;
+            _pokeBallCount = pokeBallCount;
+            _pokemonCount = pokemonCount;
         }
 
         public int GetPokeBallCount()
         {
-            return _pokeBallAmount;
+            return _pokeBallCount;
+        }
+
+        public int GetPokemonCount()
+        {
+            return _pokemonCount;
         }
 
         public Task UsePokeBallAsync()
         {
+            Logger.Log("PokeBall was used");
+            return Task.CompletedTask;
+        }
+
+        public Task UseHealingPotionAsync()
+        {
+            Logger.Log("Potion was used");
             return Task.CompletedTask;
         }
     }

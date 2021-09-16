@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using PCLMock;
 using Playground.Features;
+using TestRobot;
 
 namespace Playground.UnitTests
 {
@@ -16,9 +17,10 @@ namespace Playground.UnitTests
 
         private void ConfigureLooseBehavior()
         {
+            When(x => x.DetectPokemonAsync()).ReturnsAsync(false);
         }
 
-        public Task DetectPokemonAsync()
+        public Task<bool> DetectPokemonAsync()
         {
             return Apply(x => x.DetectPokemonAsync());
         }

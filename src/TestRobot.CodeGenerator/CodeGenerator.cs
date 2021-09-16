@@ -37,6 +37,7 @@ namespace TestRobot.CodeGenerator
             codeWriter.AppendLine("using System;");
             codeWriter.AppendLine("using System.Linq.Expressions;");
             codeWriter.AppendLine("using PCLMock;");
+            codeWriter.AppendLine("using System.Reactive.Concurrency;");
             codeWriter.AppendLines(usingStatements);
             codeWriter.AppendLine();
             codeWriter.AppendLine("namespace TestRobot");
@@ -47,10 +48,10 @@ namespace TestRobot.CodeGenerator
             codeWriter.AppendLineWithIndent(1, "{");
             codeWriter.AppendLinesWithIndent(2, mockedClassInfos.Select(x => $"internal {x.MockedInterfaceName} {x.MockedInterfaceAsFieldName};"));
             codeWriter.AppendLine();
-            codeWriter.AppendLineWithIndent(2, "public override TRobot Build()");
+            codeWriter.AppendLineWithIndent(2, "protected override TRobot Build(IScheduler scheduler)");
             codeWriter.AppendLineWithIndent(2, "{");
             codeWriter.AppendLinesWithIndent(3, mockedClassInfos.Select(x => $"{x.MockedInterfaceAsFieldName} ??= Create{x.MockName}();"));
-            codeWriter.AppendLineWithIndent(3, "return base.Build();");
+            codeWriter.AppendLineWithIndent(3, "return base.Build(scheduler);");
             codeWriter.AppendLineWithIndent(2, "}");
             codeWriter.AppendLine();
             codeWriter.AppendLinesWithIndent(2, mockedClassInfos.Select(x => $"protected virtual {x.MockName} Create{x.MockName}() => new {x.MockName}(MockBehavior.Loose);"));
