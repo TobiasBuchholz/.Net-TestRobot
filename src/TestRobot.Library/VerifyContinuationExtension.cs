@@ -5,7 +5,7 @@ using PCLMock;
 namespace TestRobot
 {
 	/// <summary>
-	/// Extension methods for the mocked object that return a <see cref="RobotVerifyContinuation{TRobot, TRobotResult}"/> so the calls can be chained.
+	/// Extension methods for the mocked object that return a <see cref="RobotVerifyContinuation{TSut, TRobot, TRobotResult}"/> so the calls can be chained.
 	/// </summary>
 	public static class VerifyContinuationExtension
 	{
@@ -24,20 +24,21 @@ namespace TestRobot
 		/// <returns>
 		/// A continuation object with which the verification can be specified.
 		/// </returns>
-		public static RobotVerifyContinuation<TRobot, TRobotResult> Verify<T, TRobot, TRobotResult>(
-            this MockBase<T> mock,
-            TestRobotResultBase<TRobot, TRobotResult> robotResult,
-            Expression<Action<T>> selector)
-			where TRobot : TestRobotBase<TRobot, TRobotResult>
-            where TRobotResult : TestRobotResultBase<TRobot, TRobotResult>
+		public static RobotVerifyContinuation<TSut, TRobot, TRobotResult> Verify<TMock, TSut, TRobot, TRobotResult>(
+            this MockBase<TMock> mock,
+            TestRobotResultBase<TSut, TRobot, TRobotResult> robotResult,
+            Expression<Action<TMock>> selector)
+			where TRobot : TestRobotBase<TSut, TRobot, TRobotResult>
+            where TRobotResult : TestRobotResultBase<TSut, TRobot, TRobotResult>
 		{
-			return new RobotVerifyContinuation<TRobot, TRobotResult>(mock.Verify(selector), robotResult);
+			return new RobotVerifyContinuation<TSut, TRobot, TRobotResult>(mock.Verify(selector), robotResult);
 		}
 
 		/// <summary>
 		/// Extension method that begins a verification specification.
 		/// </summary>
-		/// <typeparam name="T">
+		/// <typeparam name="TSut"></typeparam>
+		/// <typeparam name="TMock">
 		/// The type being mocked.
 		/// </typeparam>
 		/// <typeparam name="TMember">
@@ -57,20 +58,21 @@ namespace TestRobot
 		/// <returns>
 		/// A continuation object with which the verification can be specified.
 		/// </returns>
-		public static RobotVerifyContinuation<TRobot, TRobotResult> Verify<T, TMember, TRobot, TRobotResult>(
-            this MockBase<T> mock, 
-            TestRobotResultBase<TRobot, TRobotResult> robotResult,
-            Expression<Func<T, TMember>> selector)
-			where TRobot : TestRobotBase<TRobot, TRobotResult>
-            where TRobotResult : TestRobotResultBase<TRobot, TRobotResult>
+		public static RobotVerifyContinuation<TSut, TRobot, TRobotResult> Verify<TMock, TMember, TSut, TRobot, TRobotResult>(
+            this MockBase<TMock> mock, 
+            TestRobotResultBase<TSut, TRobot, TRobotResult> robotResult,
+            Expression<Func<TMock, TMember>> selector)
+			where TRobot : TestRobotBase<TSut, TRobot, TRobotResult>
+            where TRobotResult : TestRobotResultBase<TSut, TRobot, TRobotResult>
         {
-            return new RobotVerifyContinuation<TRobot, TRobotResult>(mock.Verify(selector), robotResult);
+            return new RobotVerifyContinuation<TSut, TRobot, TRobotResult>(mock.Verify(selector), robotResult);
         }
 
 		/// <summary>
 		/// Extension method that begins a verification specification for a property set.
 		/// </summary>
-		/// <typeparam name="T">
+		/// <typeparam name="TSut"></typeparam>
+		/// <typeparam name="TMock">
 		/// The type being mocked.
 		/// </typeparam>
 		/// <typeparam name="TMember">
@@ -93,31 +95,31 @@ namespace TestRobot
 		/// <returns>
 		/// A continuation object with which the verification can be specified.
 		/// </returns>
-		public static RobotVerifyContinuation<TRobot, TRobotResult> VerifyPropertySet<T, TMember, TRobot, TRobotResult>(
-            this MockBase<T> mock, 
-            TestRobotResultBase<TRobot, TRobotResult> robotResult, 
-            Expression<Func<T, TMember>> propertySelector, 
+		public static RobotVerifyContinuation<TSut, TRobot, TRobotResult> VerifyPropertySet<TMock, TMember, TSut, TRobot, TRobotResult>(
+            this MockBase<TMock> mock, 
+            TestRobotResultBase<TSut, TRobot, TRobotResult> robotResult, 
+            Expression<Func<TMock, TMember>> propertySelector, 
             Expression<Func<TMember>> valueFilterSelector = null)
-			where TRobot : TestRobotBase<TRobot, TRobotResult>
-            where TRobotResult : TestRobotResultBase<TRobot, TRobotResult>
+			where TRobot : TestRobotBase<TSut, TRobot, TRobotResult>
+            where TRobotResult : TestRobotResultBase<TSut, TRobot, TRobotResult>
         {
-            return new RobotVerifyContinuation<TRobot, TRobotResult>(mock.VerifyPropertySet(propertySelector, valueFilterSelector), robotResult);
+            return new RobotVerifyContinuation<TSut, TRobot, TRobotResult>(mock.VerifyPropertySet(propertySelector, valueFilterSelector), robotResult);
         }
 	}
 
 	/// <summary>
 	/// Facilitates the expression of verifications against a member in a <see cref="MockBase{T}"/>.
 	/// </summary>
-	public sealed class RobotVerifyContinuation<TRobot, TRobotResult>
-        where TRobot : TestRobotBase<TRobot, TRobotResult>
-        where TRobotResult : TestRobotResultBase<TRobot, TRobotResult>
+	public sealed class RobotVerifyContinuation<TSut, TRobot, TRobotResult>
+        where TRobot : TestRobotBase<TSut, TRobot, TRobotResult>
+        where TRobotResult : TestRobotResultBase<TSut, TRobot, TRobotResult>
 	{
 		private readonly VerifyContinuation _verifyContinuation;
 		private readonly TRobotResult _robotResult;
 
 		internal RobotVerifyContinuation(
 			VerifyContinuation verifyContinuation,
-			TestRobotResultBase<TRobot, TRobotResult> robotResult)
+			TestRobotResultBase<TSut, TRobot, TRobotResult> robotResult)
 		{
 			_verifyContinuation = verifyContinuation;
 			_robotResult = (TRobotResult) robotResult;

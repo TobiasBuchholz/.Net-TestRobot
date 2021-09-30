@@ -4,9 +4,9 @@ using Microsoft.Reactive.Testing;
 
 namespace TestRobot
 {
-    public abstract class TestRobotBase<TRobot, TRobotResult> : Genesis.TestUtil.IBuilder
-        where TRobot : TestRobotBase<TRobot, TRobotResult>
-        where TRobotResult : TestRobotResultBase<TRobot, TRobotResult>
+    public abstract class TestRobotBase<TSut, TRobot, TRobotResult> : Genesis.TestUtil.IBuilder
+        where TRobot : TestRobotBase<TSut, TRobot, TRobotResult>
+        where TRobotResult : TestRobotResultBase<TSut, TRobot, TRobotResult>
     {
         private TestScheduler _scheduler;
 
@@ -24,15 +24,13 @@ namespace TestRobot
             return (TRobot)this;
         }
 
-        public TRobot Build()
+        public virtual TRobot Build()
         {
-            return Build(_scheduler);
+            Sut = CreateSut(_scheduler);
+            return (TRobot) this;
         }
 
-        protected virtual TRobot Build(IScheduler scheduler)
-        {
-            return (TRobot)this;
-        }
+        protected abstract TSut CreateSut(TestScheduler scheduler);
 
         protected void Schedule(Action action)
         {
@@ -50,24 +48,29 @@ namespace TestRobot
             return CreateResult();
         }
 
-        protected abstract TRobotResult CreateResult();
+        protected virtual TRobotResult CreateResult()
+        {
+            return (TRobotResult) Activator.CreateInstance(typeof(TRobotResult), Sut);
+        }
 
         public TRobotResult AdvanceTo(TimeSpan time)
         {
             _scheduler.AdvanceTo(time.Ticks);
             return CreateResult();
         }
+        
+        protected TSut Sut { get; private set; }
     }
 
-    public abstract class TestRobotResultBase<TRobot, TRobotResult>
-        where TRobot : TestRobotBase<TRobot, TRobotResult>
-        where TRobotResult : TestRobotResultBase<TRobot, TRobotResult>
+    public abstract class TestRobotResultBase<TSut, TRobot, TRobotResult>
+        where TRobot : TestRobotBase<TSut, TRobot, TRobotResult>
+        where TRobotResult : TestRobotResultBase<TSut, TRobot, TRobotResult>
     {
-        protected TestRobotResultBase(TRobot robot)
+        protected TestRobotResultBase(TSut sut)
         {
-            Robot = robot;
+            Sut = sut;
         }
 
-        protected TRobot Robot { get; }
+        protected TSut Sut { get; }
     }
 }

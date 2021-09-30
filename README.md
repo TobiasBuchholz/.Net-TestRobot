@@ -64,48 +64,45 @@ As mentioned in the short description above this library tries to facilitate wri
 
 ### 1. Arrange
 
-To create your own TestRobot class simply extend the class `AutoTestRobot` and implement the abstract method `CreateResult()`. This method creates the TestRobotResult class, the second ingredient for the Robot Pattern, that is responsible for assertion and verification of the tests' outcome:
+The first step is to create your own TestRobot and TestRobotResult classes by extending the `AutoTestRobot` and `AutoTestRobotResult` classes and implement their abstract methods. The TestRobotResult is the second ingredient for the Robot Pattern and is responsible for the assertion and verification of the tests' outcome. Both base classes get generated automagically by the [TestRobot.CodeGenerator](https://nuget.org) package (see description in section **Dependencies** above):
 
 ```c#
-public sealed class PokeTrainerRobot : AutoTestRobot<PokeTrainerRobot, PokeTrainerRobotResult>
+public sealed class PokeTrainerRobot : AutoTestRobot<PokeTrainer, PokeTrainerRobot, PokeTrainerRobotResult>
 {
-    protected override PokeTrainerRobotResult CreateResult()
+    protected override PokeTrainer CreateSut(TestScheduler scheduler)
     {
-        return new PokeTrainerRobotResult(this);
+      // see the implementation below
     }
 }
 
-public sealed class PokeTrainerRobotResult : AutoTestRobotResult<PokeTrainerRobot, PokeTrainerRobotResult>
+public sealed class PokeTrainerRobotResult : AutoTestRobotResult<PokeTrainer, PokeTrainerRobot, PokeTrainerRobotResult>
 {
-    public PokeTrainerRobotResult(PokeTrainerRobot robot)
-        : base(robot)
+    public PokeTrainerRobotResult(PokeTrainer sut, PokeTrainerRobot robot)
+        : base(sut, robot)
     {
     }
 }
 ```
 
-The next step is to create your System Under Test (SUT) class. Override the virtual method `Build()` of the TestRobot class and create an instance of the class you are aiming to test:
+The next step is to implement the `CreateSut()` method of the TestRobot class. This method creates an instance of the System Under Test (SUT), so the class you are aiming to write your tests against:
 
 ```c#
 // in PokeTrainerRobot.cs
 
-internal PokeTrainer _sut;
-
 ...
 
-protected override PokeTrainerRobot Build(IScheduler scheduler)
+protected override PokeTrainer CreateSut(TestScheduler scheduler)
 {
-    base.Build(scheduler);
-    _sut = new PokeTrainer(_inventory, _pokeDex, scheduler);
-    return this;
+    return new PokeTrainer(
+        _inventory,
+        _pokeDex,
+        scheduler);
 }
 
 ...
 ```
 
-`_inventory` and `_pokeDex` are mocked instances of the `AutoTestRobot` base class that are generated automagically by the [TestRobot.CodeGenerator](https://nuget.org) package (see description in section **Dependencies** above).
-
-If needed you can override the also automagically generated creation methods of the mocks in your TestRobot class to adapt their behavior to your needs:
+`_inventory` and `_pokeDex` are mocked instances of the `AutoTestRobot` base class that are generated automagically by the [TestRobot.CodeGenerator](https://nuget.org) package. If needed you can override the also automagically generated creation methods of the mocks in your TestRobot class to adapt their behaviour to your needs:
 
 ```c#
 // in PokeTrainerRobot.cs

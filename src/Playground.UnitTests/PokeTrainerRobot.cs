@@ -1,22 +1,17 @@
 using System;
-using System.Reactive.Concurrency;
+using Microsoft.Reactive.Testing;
 using Playground.Features;
 using TestRobot;
 using Xunit;
 
 namespace Playground.UnitTests
 {
-    public sealed class PokeTrainerRobot : AutoTestRobot<PokeTrainerRobot, PokeTrainerRobotResult>
+    public sealed class PokeTrainerRobot : AutoTestRobot<PokeTrainer, PokeTrainerRobot, PokeTrainerRobotResult>
     {
-        internal PokeTrainer _sut;
         private bool _isPokemonDetectable;
         private int _pokeBallAmount;
         private int _pokemonCount;
 
-        public PokeTrainerRobot()
-        {
-        }
-        
         public PokeTrainerRobot WithIsPokemonDetectable(bool isDetectable) => 
             With(ref _isPokemonDetectable, isDetectable);
 
@@ -26,11 +21,12 @@ namespace Playground.UnitTests
         public PokeTrainerRobot WithPokemonCount(int count) => 
             With(ref _pokemonCount, count);
 
-        protected override PokeTrainerRobot Build(IScheduler scheduler)
+        protected override PokeTrainer CreateSut(TestScheduler scheduler)
         {
-            base.Build(scheduler);
-            _sut = new PokeTrainer(_inventory, _pokeDex, scheduler);
-            return this;
+            return new PokeTrainer(
+                _inventory,
+                _pokeDex,
+                scheduler);
         }
 
         protected override InventoryMock CreateInventoryMock()
@@ -50,32 +46,27 @@ namespace Playground.UnitTests
 
         public PokeTrainerRobot CatchPokemonAsync()
         {
-            Schedule(() => _sut.CatchPokemonAsync());
+            Schedule(() => Sut.CatchPokemonAsync());
             return this;
         }
 
         public PokeTrainerRobot HealPokemonsAsync(long atTime = 0)
         {
-            Schedule(TimeSpan.FromMilliseconds(atTime), () => _sut.HealPokemonsAsync());
+            Schedule(TimeSpan.FromMilliseconds(atTime), () => Sut.HealPokemonsAsync());
             return this;
-        }
-
-        protected override PokeTrainerRobotResult CreateResult()
-        {
-            return new PokeTrainerRobotResult(this);
         }
     }
 
-    public sealed class PokeTrainerRobotResult : AutoTestRobotResult<PokeTrainerRobot, PokeTrainerRobotResult>
+    public sealed class PokeTrainerRobotResult : AutoTestRobotResult<PokeTrainer, PokeTrainerRobot, PokeTrainerRobotResult>
     {
-        public PokeTrainerRobotResult(PokeTrainerRobot robot)
-            : base(robot)
+        public PokeTrainerRobotResult(PokeTrainer sut, PokeTrainerRobot robot)
+            : base(sut, robot)
         {
         }
 
         public PokeTrainerRobotResult AssertIsPokemonCaught(bool expected)
         {
-            Assert.Equal(expected, Robot._sut.IsPokemonCaught);
+            Assert.Equal(expected, Sut.IsPokemonCaught);
             return this;
         }
     }
