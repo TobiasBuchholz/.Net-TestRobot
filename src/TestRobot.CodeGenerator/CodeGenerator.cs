@@ -58,7 +58,7 @@ namespace TestRobot.CodeGenerator
             codeWriter.AppendLineWithIndent(3, "return (TRobotResult) Activator.CreateInstance(typeof(TRobotResult), Sut, this);");
             codeWriter.AppendLineWithIndent(2, "}");
             codeWriter.AppendLine();
-            codeWriter.AppendLinesWithIndent(2, mockedClassInfos.Select(x => $"protected virtual {x.MockName} Create{x.MockName}() => new{x.MockName}(MockBehavior.Loose);"));
+            codeWriter.AppendLinesWithIndent(2, mockedClassInfos.Select(x => $"protected virtual {x.MockName} Create{x.MockName}() => new {x.MockName}(MockBehavior.Loose);"));
             codeWriter.AppendLineWithIndent(1, "}");
             codeWriter.AppendLine();
             codeWriter.AppendLineWithIndent(1, "public abstract class AutoTestRobotResult<TSut, TRobot, TRobotResult> : TestRobotResultBase<TSut, TRobot, TRobotResult>");
@@ -74,7 +74,7 @@ namespace TestRobot.CodeGenerator
             codeWriter.AppendLineWithIndent(2, "}");
             codeWriter.AppendLine();
             codeWriter.AppendLines(mockedClassInfos.Select(CreateVerifyMockMethod));
-            codeWriter.AppendLineWithIndent(2, "protected TRobot Robot => _autoRobot as TRobot ?? throw new ArgumentException($\"Passed robot must be of type {nameof(AutoTestRobot2<TSut, TRobot, TRobotResult>)}\");");
+            codeWriter.AppendLineWithIndent(2, "protected TRobot Robot => _autoRobot as TRobot ?? throw new ArgumentException($\"Passed robot must be of type {nameof(AutoTestRobot<TSut, TRobot, TRobotResult>)}\");");
             codeWriter.AppendLineWithIndent(1, "}");
             codeWriter.AppendLine("}");
 
