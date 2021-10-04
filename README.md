@@ -94,15 +94,15 @@ The next step is to implement the `CreateSut()` method of the TestRobot class. T
 protected override PokeTrainer CreateSut(TestScheduler scheduler)
 {
     return new PokeTrainer(
-        _inventory,
-        _pokeDex,
+        InventoryMock,
+        PokeDexMock,
         scheduler);
 }
 
 ...
 ```
 
-`_inventory` and `_pokeDex` are mocked instances of the `AutoTestRobot` base class that are generated automagically by the [TestRobot.CodeGenerator](https://nuget.org) package. If needed you can override the also automagically generated creation methods of the mocks in your TestRobot class to adapt their behaviour to your needs:
+`InventoryMock` and `PokeDexMock` are properties of the `AutoTestRobot` base class that are generated automagically by the [TestRobot.CodeGenerator](https://nuget.org) package. If needed you can override the also automagically generated creation methods of the mocks in your TestRobot class to adapt their behaviour to your needs:
 
 ```c#
 // in PokeTrainerRobot.cs

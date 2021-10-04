@@ -24,8 +24,8 @@ namespace Playground.UnitTests
         protected override PokeTrainer CreateSut(TestScheduler scheduler)
         {
             return new PokeTrainer(
-                _inventory,
-                _pokeDex,
+                InventoryMock,
+                PokeDexMock,
                 scheduler);
         }
 

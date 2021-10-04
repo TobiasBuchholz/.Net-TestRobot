@@ -16,7 +16,7 @@ namespace TestRobot
 		/// The mock on which the method gets called.
 		/// </param>
 		/// <param name="robotResult">
-		/// The robot result object that enables the chaining of calls.
+		/// The robot result object that enables assertion and verification of the tests' outcome.
 		/// </param>
 		/// <param name="selector">
 		/// An expression that resolves to the member being verified.
@@ -37,20 +37,26 @@ namespace TestRobot
 		/// <summary>
 		/// Extension method that begins a verification specification.
 		/// </summary>
-		/// <typeparam name="TSut"></typeparam>
 		/// <typeparam name="TMock">
 		/// The type being mocked.
 		/// </typeparam>
 		/// <typeparam name="TMember">
 		/// The type of the property.
 		/// </typeparam>
-		/// <typeparam name="TRobot"></typeparam>
-		/// <typeparam name="TRobotResult"></typeparam>
+		/// <typeparam name="TSut">
+		/// The type of the System Under Test (SUT).
+		/// </typeparam>
+		/// <typeparam name="TRobot">
+		/// The type of the TestRobot.
+		/// </typeparam>
+		/// <typeparam name="TRobotResult">
+		/// The type of the TestRobotResult to the corresponding TestRobot.
+		/// </typeparam>
 		/// <param name="mock">
 		/// The mock on which the method gets called.
 		/// </param>
 		/// <param name="robotResult">
-		/// The robot result object that enables the chaining of calls.
+		/// The robot result object that enables assertion and verification of the test' outcome.
 		/// </param>
 		/// <param name="selector">
 		/// An expression that resolves to the member being verified.
@@ -71,20 +77,26 @@ namespace TestRobot
 		/// <summary>
 		/// Extension method that begins a verification specification for a property set.
 		/// </summary>
-		/// <typeparam name="TSut"></typeparam>
 		/// <typeparam name="TMock">
 		/// The type being mocked.
 		/// </typeparam>
 		/// <typeparam name="TMember">
 		/// The type of the property.
 		/// </typeparam>
-		/// <typeparam name="TRobot"></typeparam>
-		/// <typeparam name="TRobotResult"></typeparam>
+		/// <typeparam name="TSut">
+		/// The type of the System Under Test (SUT).
+		/// </typeparam>
+		/// <typeparam name="TRobot">
+		/// The type of the TestRobot.
+		/// </typeparam>
+		/// <typeparam name="TRobotResult">
+		/// The type of the TestRobotResult to the corresponding TestRobot.
+		/// </typeparam>
 		/// <param name="mock">
 		/// The mock on which the method gets called.
 		/// </param>
 		/// <param name="robotResult">
-		/// The robot result object that enables the chaining of calls.
+		/// The robot result object that enables assertion and verification of the test' outcome.
 		/// </param>
 		/// <param name="propertySelector">
 		/// An expression that resolves to the property being verified.
