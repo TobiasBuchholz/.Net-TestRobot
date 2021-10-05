@@ -29,5 +29,9 @@ namespace TestRobot.CodeGenerator
         public string NameOfMockedInterfaceAsProperty => MockedInterfaceName.StartsWith("I")
                     ? $"{char.ToUpper(MockedInterfaceName[1])}{MockedInterfaceName.Substring(2)}Mock"
                     : $"{MockedInterfaceName.FirstCharToUpperCase()}Mock";
+        
+        public string NameOfMockedInterfaceAsField => MockedInterfaceName.StartsWith("I")
+                    ? $"_{char.ToLower(MockedInterfaceName[1])}{MockedInterfaceName.Substring(2)}Mock"
+                    : $"_{MockedInterfaceName.FirstCharToLowerCase()}Mock";
     }
 }

@@ -21,14 +21,14 @@ namespace TestRobot
         where TRobot : TestRobotBase<TSut, TRobot, TRobotResult>
         where TRobotResult : TestRobotResultBase<TSut, TRobot, TRobotResult>
     {
-        private TestScheduler _scheduler;
+        private TestScheduler _testScheduler;
 
         /// <summary>
         /// Constructor
         /// </summary>
         protected TestRobotBase()
         {
-            _scheduler = new TestScheduler();
+            _testScheduler = new TestScheduler();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace TestRobot
         /// </param>
         /// <returns>The instance of the current TestRobot.</returns>
         public TRobot WithScheduler(TestScheduler scheduler) =>
-            With(ref _scheduler, scheduler);
+            With(ref _testScheduler, scheduler);
 
         /// <summary>
         /// This method enables setting fields for the TestRobot by following the Builder Pattern.
@@ -61,49 +61,45 @@ namespace TestRobot
         /// <returns>The instance of the current TestRobot.</returns>
         public virtual TRobot Build()
         {
-            Sut = CreateSut(_scheduler);
+            Sut = CreateSut();
             return (TRobot) this;
         }
 
         /// <summary>
         /// Creates the System Under Test (SUT).
         /// </summary>
-        /// <param name="scheduler">
-        /// The scheduler that will be used in the methods responsible for traveling through time in your tests,
-        /// e.g. <see cref="AdvanceTo"/>, <see cref="AdvanceUntilEmpty"/> or <see cref="Schedule(System.Action)"/>.
-        /// </param>
         /// <returns>The System Under Test (SUT).</returns>
-        protected abstract TSut CreateSut(TestScheduler scheduler);
+        protected abstract TSut CreateSut();
 
         /// <summary>
-        /// Schedules an action to be executed on a default instance of the <see cref="TestScheduler"/> or the instance that was
+        /// Schedules an action to be executed on a default instance of the <see cref="Microsoft.Reactive.Testing.TestScheduler"/> or the instance that was
         /// given by <see cref="WithScheduler"/>.
         /// </summary>
         /// <param name="action">Action to execute.</param>
         protected void Schedule(Action action)
         {
-            _scheduler.Schedule(action);
+            _testScheduler.Schedule(action);
         }
         
         /// <summary>
-        /// Schedules an action to be executed after the specified relative due time on a default instance of the <see cref="TestScheduler"/> or the
+        /// Schedules an action to be executed after the specified relative due time on a default instance of the <see cref="Microsoft.Reactive.Testing.TestScheduler"/> or the
         /// instance that was given by <see cref="WithScheduler"/>.
         /// </summary>
         /// <param name="dueTime">Relative time after which to execute the action.</param>
         /// <param name="action">Action to execute.</param>
         protected void Schedule(TimeSpan dueTime, Action action)
         {
-            _scheduler.Schedule(dueTime, action);
+            _testScheduler.Schedule(dueTime, action);
         }
 
         /// <summary>
-        /// Advances the current instance of the <see cref="TestScheduler"/> until the last scheduled action is executed and creates the
+        /// Advances the current instance of the <see cref="Microsoft.Reactive.Testing.TestScheduler"/> until the last scheduled action is executed and creates the
         /// TestRobotResult. This method should be called as the final step for the Act part of the AAA Pattern.
         /// </summary>
         /// <returns>The TestRobotResult to assert the test's outcome.</returns>
         public TRobotResult AdvanceUntilEmpty()
         {
-            _scheduler.AdvanceUntilEmpty();
+            _testScheduler.AdvanceUntilEmpty();
             return CreateResult();
         }
 
@@ -116,13 +112,13 @@ namespace TestRobot
         }
 
         /// <summary>
-        /// Advances the clock of the current instance of <see cref="TestScheduler"/>'s to the specified time, running all work till that point.
+        /// Advances the clock of the current instance of <see cref="Microsoft.Reactive.Testing.TestScheduler"/>'s to the specified time, running all work till that point.
         /// </summary>
         /// <param name="time">Absolute time to advance the scheduler's clock to.</param>
         /// <returns>The TestRobotResult to assert the test's outcome.</returns>
         public TRobotResult AdvanceTo(TimeSpan time)
         {
-            _scheduler.AdvanceTo(time.Ticks);
+            _testScheduler.AdvanceTo(time.Ticks);
             return CreateResult();
         }
         
@@ -130,6 +126,13 @@ namespace TestRobot
         /// Instance of the System Under Test (SUT).
         /// </summary>
         protected TSut Sut { get; private set; }
+
+        /// <summary>
+        /// The scheduler that will be used in the methods responsible for travelling through time in your tests,
+        /// e.g. <see cref="AdvanceTo"/>, <see cref="AdvanceUntilEmpty"/> or <see cref="Schedule(System.Action)"/>.
+        /// Use <see cref="WithScheduler"/> to inject your a particular TestScheduler for a specific test case if needed.
+        /// </summary>
+        protected IScheduler TestScheduler => _testScheduler;
     }
 
     /// <summary>

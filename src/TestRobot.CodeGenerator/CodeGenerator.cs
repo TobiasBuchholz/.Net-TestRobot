@@ -50,9 +50,12 @@ namespace TestRobot.CodeGenerator
             codeWriter.AppendLineWithIndent(2, "where TRobot : TestRobotBase<TSut, TRobot, TRobotResult>");
             codeWriter.AppendLineWithIndent(2, "where TRobotResult : TestRobotResultBase<TSut, TRobot, TRobotResult>");
             codeWriter.AppendLineWithIndent(1, "{");
+            codeWriter.AppendLinesWithIndent(2, mockedClassInfos.Select(x => $"private {x.MockName} {x.NameOfMockedInterfaceAsField};"));
+            codeWriter.AppendLine();
+            codeWriter.AppendLines(mockedClassInfos.Select(CreateWithMockMethod));
             codeWriter.AppendLineWithIndent(2, "public override TRobot Build()");
             codeWriter.AppendLineWithIndent(2, "{");
-            codeWriter.AppendLinesWithIndent(3, mockedClassInfos.Select(x => $"{x.NameOfMockedInterfaceAsProperty} = Create{x.MockName}();"));
+            codeWriter.AppendLinesWithIndent(3, mockedClassInfos.Select(x => $"{x.NameOfMockedInterfaceAsProperty} = {x.NameOfMockedInterfaceAsField} ?? Create{x.MockName}();"));
             codeWriter.AppendLineWithIndent(3, "return base.Build();");
             codeWriter.AppendLineWithIndent(2, "}");
             codeWriter.AppendLine();
@@ -62,8 +65,7 @@ namespace TestRobot.CodeGenerator
             codeWriter.AppendLineWithIndent(2, "}");
             codeWriter.AppendLine();
             codeWriter.AppendLines(mockedClassInfos.Select(CreateMockCreationMethod));
-            codeWriter.AppendLine();
-            codeWriter.AppendLinesWithIndent(2, mockedClassInfos.Select(x => $"internal {x.MockedInterfaceName} {x.NameOfMockedInterfaceAsProperty} {{ get; private set; }}"));
+            codeWriter.AppendLinesWithIndent(2, mockedClassInfos.Select(x => $"internal {x.MockName} {x.NameOfMockedInterfaceAsProperty} {{ get; private set; }}"));
             codeWriter.AppendLineWithIndent(1, "}");
             codeWriter.AppendLine();
             codeWriter.AppendLineWithIndent(1, "/// <summary>");
@@ -97,6 +99,17 @@ namespace TestRobot.CodeGenerator
             codeWriter.AppendLine("}");
 
             context.AddSource("AutoTestRobot.cs", SourceText.From(codeWriter.ToString(), Encoding.UTF8));
+        }
+
+        private static string CreateWithMockMethod(MockedClassInfo classInfo)
+        {
+            var codeWriter = new CodeWriter();
+            codeWriter.AppendLineWithIndent(2, $"/// <summary>Injects an particular instance of <see cref=\"{classInfo.MockNamespace}.{classInfo.MockName}\"/> that can be used for a specific test case if needed.</summary>");
+            codeWriter.AppendLineWithIndent(2, $"/// <param name=\"value\">The instance of the <see cref=\"{classInfo.MockNamespace}.{classInfo.MockName}\"/>.</param>");
+            codeWriter.AppendLineWithIndent(2, $"/// <returns>The current TestRobot.</returns>");
+            codeWriter.AppendLineWithIndent(2, $"public TRobot With{classInfo.MockName}({classInfo.MockName} value) =>");
+            codeWriter.AppendLineWithIndent(3, $"With(ref {classInfo.NameOfMockedInterfaceAsField}, value);");
+            return codeWriter.ToString();
         }
 
         private static string CreateMockCreationMethod(MockedClassInfo classInfo)

@@ -1,5 +1,4 @@
 using System;
-using Microsoft.Reactive.Testing;
 using Playground.Features;
 using TestRobot;
 using Xunit;
@@ -21,12 +20,12 @@ namespace Playground.UnitTests
         public PokeTrainerRobot WithPokemonCount(int count) => 
             With(ref _pokemonCount, count);
 
-        protected override PokeTrainer CreateSut(TestScheduler scheduler)
+        protected override PokeTrainer CreateSut()
         {
             return new PokeTrainer(
                 InventoryMock,
                 PokeDexMock,
-                scheduler);
+                TestScheduler);
         }
 
         protected override InventoryMock CreateInventoryMock()
