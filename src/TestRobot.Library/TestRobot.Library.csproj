@@ -24,15 +24,15 @@
     <PackageVersion>1.0.0</PackageVersion>
 
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/TobiasBuchholz/Plugin.TestRobot</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/TobiasBuchholz/TestRobot.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/TobiasBuchholz/.Net-TestRobot</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TobiasBuchholz/.Net-TestRobot.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageIcon>icon.png</PackageIcon>
     <PackageTags>testing</PackageTags>
 
     <Title>TestRobot</Title>
-    <Summary>Small plugin to simplify writing unit tests.</Summary>
-    <Description>This plugin helps you to abstract away ugly arranging code to write more readable unit tests.</Description>
+    <Summary>TestRobot is a small library to facilitate writing more stable, readable and maintainable tests by applying the Robot Pattern.</Summary>
+    <Description>The main idea behind the Robot Pattern is to hide the implementation details of tests that are following the AAA Pattern (Arrange-Act-Assert) in a so called Robot and RobotResult class. Combining this idea with the Builder Pattern makes it easy to write very readable and maintainable tests</Description>
 
     <Owners>Tobias Buchholz</Owners>
     <Authors>Tobias Buchholz</Authors>
