@@ -1,5 +1,7 @@
 # .Net-TestRobot
 
+<img align="right" width="100" height="100" src="https://raw.githubusercontent.com/TobiasBuchholz/.Net-TestRobot/master/art/icon.png">
+
 TestRobot is a small library to facilitate writing more stable, readable and maintainable tests by applying the Robot Pattern.
 
 ## What is the Robot Pattern?
@@ -311,3 +313,5 @@ public void heals_pokemons_of_inventory()
         .WasCalledExactly(6);
 }
 ```
+-----------------------------------------
+<div>*Icon erstellt von <a href="https://www.flaticon.com/de/autoren/itim2101" title="itim2101">itim2101</a></div>

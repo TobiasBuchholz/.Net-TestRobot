@@ -8,9 +8,9 @@
     <RootNamespace>TestRobot</RootNamespace>
 
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>1.0.0.5</AssemblyVersion>
-    <AssemblyFileVersion>1.0.0.5</AssemblyFileVersion>
-    <Version>1.0.0.5</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0</AssemblyFileVersion>
+    <Version>1.0.0</Version>
     <NeutralLanguage>en</NeutralLanguage>
 
     <!--Don't auto add files for me, I will tell you -->
@@ -21,13 +21,13 @@
 
     <!--Assembly and Namespace info -->
     <PackageId>TestRobot</PackageId>
-    <PackageVersion>1.0.0.5</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
 
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/TobiasBuchholz/Plugin.TestRobot</PackageProjectUrl>
     <RepositoryUrl>https://github.com/TobiasBuchholz/TestRobot.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <!--    <PackageIcon>icon.png</PackageIcon>-->
+    <PackageIcon>icon.png</PackageIcon>
     <PackageTags>testing</PackageTags>
 
     <Title>TestRobot</Title>
@@ -67,6 +67,7 @@
     <None Include="**\*.cs;**\*.xml;**\*.axml;**\*.png" Exclude="obj\**\*.*;bin\**\*.*;bin;obj" />
     <None Remove=".vs\**" />
     <None Remove=".idea\**" />
+	<None Include="..\..\art\icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

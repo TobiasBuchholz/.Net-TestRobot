@@ -8,9 +8,9 @@
     <RootNamespace>TestRobot.CodeGenerator</RootNamespace>
     
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>1.0.0.5</AssemblyVersion>
-    <AssemblyFileVersion>1.0.0.5</AssemblyFileVersion>
-    <Version>1.0.0.5</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0</AssemblyFileVersion>
+    <Version>1.0.0</Version>
     <NeutralLanguage>en</NeutralLanguage>
 
     <!-- Helper to add defines-->
@@ -18,14 +18,14 @@
     
     <!--Assembly and Namespace info -->
     <PackageId>TestRobot.CodeGenerator</PackageId>
-    <PackageVersion>1.0.0.5</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Tobias Buchholz 2021</Copyright>
     <PackageProjectUrl>https://github.com/TobiasBuchholz/TestRobot</PackageProjectUrl>
     <RepositoryUrl>https://github.com/TobiasBuchholz/TestRobot.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <!--    <PackageIcon>icon.png</PackageIcon>-->
+    <PackageIcon>icon.png</PackageIcon>
     <PackageTags>testing</PackageTags>
 
     <Title>TestRobot</Title>
@@ -73,6 +73,7 @@
     <None Include="**\*.cs;**\*.xml;**\*.axml;**\*.png" Exclude="obj\**\*.*;bin\**\*.*;bin;obj" />
     <None Remove=".vs\**" />
     <None Remove=".idea\**" />
+	<None Include="..\..\art\icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
