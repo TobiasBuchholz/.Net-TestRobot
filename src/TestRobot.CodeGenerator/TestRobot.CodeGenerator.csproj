@@ -26,7 +26,7 @@
     <RepositoryUrl>https://github.com/TobiasBuchholz/.Net-TestRobot.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageTags>testing</PackageTags>
+    <PackageTags>testing, unit-test, design-pattern, helper</PackageTags>
 
     <Title>TestRobot.CodeGenerator</Title>
     <Summary>This is an additional package to the TestRobot package that generates some boiler plate code for you.</Summary>

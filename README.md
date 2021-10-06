@@ -35,6 +35,15 @@ public void catches_pokemon_regarding_to_pokeball_amount(int pokeBallAmount, boo
 ```
 For more information take a look at this [github gist](https://gist.github.com/bharatdodeja/ac001b6a24028bde56943ee40cab7dbd) which offers a quite good explanation for the Robot Pattern in the context of Android Esspresso UI Testing.
 
+## Installation
+#### Nuget
+[![NuGet](https://img.shields.io/nuget/v/TestRobot.svg?maxAge=86400&style=flat)](https://www.nuget.org/packages/TestRobot/1.0.0)
+> Install-Package TestRobot
+
+[![NuGet](https://img.shields.io/nuget/v/TestRobot.CodeGenerator.svg?maxAge=86400&style=flat)](https://www.nuget.org/packages/TestRobot.CodeGenerator/1.0.0)
+
+> Install-Package TestRobot.CodeGenerator
+
 ## Dependencies
 ###### [PCLMock](https://github.com/kentcb/PCLMock)
 A lightweight, but powerful mocking framework by Kent Boogaart.
@@ -42,7 +51,7 @@ A lightweight, but powerful mocking framework by Kent Boogaart.
 ###### [Genesis.TestUtil](https://github.com/kentcb/Genesis.TestUtil)
 A simple library containing helpers for test code also by Kent Boogaart. The main reason for using it is it's `TestScheduler` class, which is a virtual time scheduler using [Reactive Extensions](https://github.com/dotnet/reactive) and makes it possible to control time in your tests.
 
-###### ([TestRobot.CodeGenerator](https://nuget.org))
+###### ([TestRobot.CodeGenerator](https://www.nuget.org/packages/TestRobot.CodeGenerator/1.0.0))
 This additional library is not needed necessarily but it generates some boiler plate code for you, hence I'd recommend to use it. It generates the `AutoTestRobot` and `AutoTestRobotResult` classes that you will see in the example code below. These classes serve as the base classes for the Robot Pattern. The code generator scans your test project's files for classes that are ending with *Mock and generates instances of these mocks in the `AutoTestRobot` class, so they can be used for the creation of the System Under Test (SUT) object. Furthermore it generates methods that help to verify times of method executions by the generated mocks in the `AutoTestRobotResult` class.
 
 ## Disclaimer
@@ -66,7 +75,7 @@ As mentioned in the short description above this library tries to facilitate wri
 
 ### 1. Arrange
 
-The first step is to create your own TestRobot and TestRobotResult classes by extending the `AutoTestRobot` and `AutoTestRobotResult` classes and implement their abstract methods. The TestRobotResult is the second ingredient for the Robot Pattern and is responsible for the assertion and verification of the tests' outcome. Both base classes get generated automagically by the [TestRobot.CodeGenerator](https://nuget.org) package (see description in section **Dependencies** above):
+The first step is to create your own TestRobot and TestRobotResult classes by extending the `AutoTestRobot` and `AutoTestRobotResult` classes and implement their abstract methods. The TestRobotResult is the second ingredient for the Robot Pattern and is responsible for the assertion and verification of the tests' outcome. Both base classes get generated automagically by the [TestRobot.CodeGenerator](https://www.nuget.org/packages/TestRobot.CodeGenerator/1.0.0) package (see description in section **Dependencies** above):
 
 ```c#
 public sealed class PokeTrainerRobot : AutoTestRobot<PokeTrainer, PokeTrainerRobot, PokeTrainerRobotResult>
@@ -104,7 +113,7 @@ protected override PokeTrainer CreateSut(TestScheduler scheduler)
 ...
 ```
 
-`InventoryMock` and `PokeDexMock` are properties of the `AutoTestRobot` base class that are generated automagically by the [TestRobot.CodeGenerator](https://nuget.org) package. If needed you can override the also automagically generated creation methods of the mocks in your TestRobot class to adapt their behaviour to your needs:
+`InventoryMock` and `PokeDexMock` are properties of the `AutoTestRobot` base class that are generated automagically by the [TestRobot.CodeGenerator](https://www.nuget.org/packages/TestRobot.CodeGenerator/1.0.0) package. If needed you can override the also automagically generated creation methods of the mocks in your TestRobot class to adapt their behaviour to your needs:
 
 ```c#
 // in PokeTrainerRobot.cs
