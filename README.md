@@ -102,12 +102,12 @@ The next step is to implement the `CreateSut()` method of the TestRobot class. T
 
 ...
 
-protected override PokeTrainer CreateSut(TestScheduler scheduler)
+protected override PokeTrainer CreateSut()
 {
     return new PokeTrainer(
         InventoryMock,
         PokeDexMock,
-        scheduler);
+        TestScheduler);
 }
 
 ...
